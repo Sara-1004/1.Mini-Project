@@ -6,20 +6,14 @@ users_file = r'C:\Users\Admin\Documents\ml-1m[1]\ml-1m\users.dat'
 movies = {}
 user_data = {}
 ratings_data = {}
-
-# Read the movies file and extract MovieID and Genres
 with open(movies_file, 'r') as f:
     for line in f:
         movie_id, title, genres = line.strip().split('::')
         movies[int(movie_id)] = genres.split('|')
-
-# Read the users file to extract User demographics
 with open(users_file, 'r') as f:
     for line in f:
         user_id, gender, age, occupation, zip_code = line.strip().split('::')
         user_data[int(user_id)] = {'gender': gender, 'age': age, 'occupation': occupation}
-
-# Read the ratings file to extract ratings for each movie by users
 with open(ratings_file, 'r') as f:
     for line in f:
         user_id, movie_id, rating, timestamp = map(int, line.strip().split('::'))
@@ -28,12 +22,9 @@ with open(ratings_file, 'r') as f:
         ratings_data[movie_id]['ratings'].append(rating)
         ratings_data[movie_id]['user_ids'].append(user_id)
 
-# Calculate the distribution of ratings by genre
 genre_rating_count = {}
 genre_rating_sum = {}
 genre_movie_count = {}
-
-# Calculate the average rating per movie and group by genres
 for movie_id, movie_info in ratings_data.items():
     avg_rating = sum(movie_info['ratings']) / len(movie_info['ratings'])
     for genre in movies[movie_id]:
@@ -48,7 +39,7 @@ for movie_id, movie_info in ratings_data.items():
 # Calculate average rating per genre
 genre_avg_rating = {genre: genre_rating_sum[genre] / genre_rating_count[genre] for genre in genre_rating_count}
 
-# Identify the most popular genres by user demographics
+#most popular genres by user demographics
 age_groups = {1: 'Under 18', 18: '18-24', 25: '25-34', 35: '35-44', 45: '45-49', 50: '50-55', 56: '56+'}
 occupation_groups = {
     1: 'academic/educator', 2: 'artist', 3: 'clerical/admin', 4: 'college/grad student', 
