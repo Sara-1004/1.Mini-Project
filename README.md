@@ -1,6 +1,6 @@
 # 1.Mini-Project
 
-Mini Project on Descriptive Analytics using file handling
+A Practice Mini Project on Descriptive Analytics using file handling at NexGen Analytix Internship
 
 Descriptive Analysis
 
